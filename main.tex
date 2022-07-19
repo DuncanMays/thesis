@@ -38,17 +38,28 @@ This work aims to solve the MEL learning problem by optimally allocating data be
 
 \begin{enumerate}
   \item \textbf{Objective 1:} In order to effectively allocate tasks between distributed learners with varying training capabilities, we must have a way to assess the training capabilities of learners. The objective is to be able to predict how much time a learner will need to train a given model on a given number of data samples. We evaluate our solution against industry-standard methods such as FLOPS.
-      
+
   \item \textbf{Objective 2:} To preserve privacy of learner device characteristics, we experiment with a decentralized allocation scheme where learners request an amount of data for training, rather than have it assigned to them by a centralized entity. Decentralized schemes are tolerant to learners that do not wish to participate fully, and only contribute a part of their total computational capabilities, as they can simply request less data than their maximum limit.
-  
+
   \item \textbf{Objective 3:} Distributed learners must synchronize in between updates to maintain consistency in the parameters being trained. This synchronization step can only occur once all learners have completed their update routine, and so it becomes important to ensure that every learner finishes their updates prior to a given training deadline. In this work we aim to allocate data such that all learners complete their local training regime within a global time constraint.
-  
+
   \item \textbf{Objective 4:} Learner capabilities will change over the course of a training regime due to resource contention with other tasks running on the learner. It is impractical to continually measure training ability, and so we must model this variation as uncertainty in learner capabilities. A key objective in MEL is allocating data effectively in the presence of this uncertainty, which must be done by considering the expected delay of each training task, as calculated from the distribution of learner capabilities.
-      
+
 \end{enumerate}
 
 \section{Contributions}
 
+\begin{enumerate}
+  \item \textbf{Contribution 1:} We propose Subset Benchmarking (SB) which is our method to estimate the training ability of each learner device. ML training tasks usually consist of the same process being repeated many times. Stochastic Gradient Descent (SGD) for instance, involves the same backpropegation calculation and parameter update being performed on each batch in a data set. SB works by running a subset of the training task and then extrapolating the time it took to predict the time required for the whole task. This is done for SGD by training over only a few batches from the dataset, and then scaling the amount of time it took to the whole dataset.
+      
+  \item \textbf{Contribution 2:} Using SB, we can estimate the training capability of each learner, which we must use to allocate data between them to optimize some metric within a time constraint. In this work, we propose a method to determine the maximal amount of data that each learner is capable of processing in the given amount of time. These Data Upper Bounds (DUB) then become constraints for the optimization calculation that allocates data between the learners.
+  
+  \item \textbf{Contribution 3:} In this work, we consider the variations in learner capabilities over time due to resource contention with other tasks. We model these time variations as uncertainty in learner capabilities, and make calculations for DUB and optimization metrics as expected values across the distribution of learner capabilities.
+  
+\end{enumerate}
+
 \section{Thesis Outline}
+
+This thesis is organized into the following chapters. Chapter 2 gives a review of the relevant literature on MEL, benchmarking, and data allocation in parallel machine learning. Chapter 3 provides a description of our method for decentralized data allocation using SB. Chapter 4 discusses multi-task parallel learning in the presence of uncertainty of learner capabilities. Chapter 5 concludes our work with a summary and gives directions for future research.
 
 \end{document} 
