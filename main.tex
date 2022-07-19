@@ -25,11 +25,30 @@ Implementing algorithms in an MEL environment presents several problems which th
 
 \begin{enumerate}
   \item \textbf{Device Heterogeneity:} EEC entails the usage of consumer devices on the edge of the internet, tablets, smart devices, laptops. Such devices have varying compute and computation capabilities, as they possess different hardware, power needs and network connection quality. Heterogeneity of learner devices poses a resource allocation issue, as learners must be assigned a task no longer than the time given to solve it. Should all learners be assigned the same task, the cluster would be limited by its weakest learner, which is an unacceptable compromise.
-      
+
   \item \textbf{Uncertainty in Device Capabilities:} In a real MEL system, learner devices are owned by consumers and companies that may use them for other tasks throughout the training regime. This will interfere with the training capabilities of affected learners through resource contention, and therefor poses another resource allocation issue. Variability in device capabilities, possibly due to contention with other tasks, can be modeled as uncertainty.
-  
-  \item \textbf{Consumer Privacy:} Many consumers value their privacy, and so to improve the adoption of their product, companies must use algorithms that minimize the amount of data being sent over the network for analysis. In some cases, data exchanges are limited by laws such as the European Commission's General Data Privacy Regulation, which places stringent limits on data collection. Such concerns can extend to data on the compute capabilities of learner devices, as this information could be used to monitor user behavior or even identify devices. 
-  
+
+  \item \textbf{Consumer Privacy:} Many consumers value their privacy, and so to improve the adoption of their product, companies must use algorithms that minimize the amount of data being sent over the network for analysis. In some cases, data exchanges are limited by laws such as the European Commission's General Data Privacy Regulation, which places stringent limits on data collection. Such concerns can extend to data on the compute capabilities of learner devices, as this information could be used to monitor user behavior or even identify devices.
+
 \end{enumerate}
+
+\section{Research Objectives}
+
+This work aims to solve the MEL learning problem by optimally allocating data between distributed learners. In single-task parallel learning, we compare the performance of a decentralized allocation method (DAB) against a centralized scheme (CSA). In multi-task parallel learning, we contrast three methods for data allocation in the presence of uncertainty, EOL minimizes the expected opportunity loss to ensure equitable allocation, MMET minimizes the training time required, and RSS completely ignores uncertainty. our four main objectives are summarized below:
+
+\begin{enumerate}
+  \item \textbf{Objective 1:} In order to effectively allocate tasks between distributed learners with varying training capabilities, we must have a way to assess the training capabilities of learners. The objective is to be able to predict how much time a learner will need to train a given model on a given number of data samples. We evaluate our solution against industry-standard methods such as FLOPS.
+      
+  \item \textbf{Objective 2:} To preserve privacy of learner device characteristics, we experiment with a decentralized allocation scheme where learners request an amount of data for training, rather than have it assigned to them by a centralized entity. Decentralized schemes are tolerant to learners that do not wish to participate fully, and only contribute a part of their total computational capabilities, as they can simply request less data than their maximum limit.
+  
+  \item \textbf{Objective 3:} Distributed learners must synchronize in between updates to maintain consistency in the parameters being trained. This synchronization step can only occur once all learners have completed their update routine, and so it becomes important to ensure that every learner finishes their updates prior to a given training deadline. In this work we aim to allocate data such that all learners complete their local training regime within a global time constraint.
+  
+  \item \textbf{Objective 4:} Learner capabilities will change over the course of a training regime due to resource contention with other tasks running on the learner. It is impractical to continually measure training ability, and so we must model this variation as uncertainty in learner capabilities. A key objective in MEL is allocating data effectively in the presence of this uncertainty, which must be done by considering the expected delay of each training task, as calculated from the distribution of learner capabilities.
+      
+\end{enumerate}
+
+\section{Contributions}
+
+\section{Thesis Outline}
 
 \end{document} 
